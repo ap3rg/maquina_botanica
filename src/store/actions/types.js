@@ -1,0 +1,3 @@
+// Types of action
+
+export const SET_APPLICATION_PARAMETER = "SET_APPLICATION_PARAMETER"  
