@@ -1,3 +1,16 @@
+@import "~@blueprintjs/core/lib/css/blueprint.css";
+
+:root {
+  /* Paletter */
+
+  --primary-1: #15567fff;
+  --primary-2: #0b372cff;
+
+  /* Var Colors*/
+  --title-color: var(--primary-1);
+ 
+}
+
 .App {
   text-align: center;
 }
