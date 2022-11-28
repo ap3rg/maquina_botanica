@@ -1,17 +1,18 @@
 import './App.css';
-import { RefApplicationParameterHook } from './hooks/ApplicationParamatersHook';
-import { SELECTED_MODE } from './Constants';
-import { ModeSelect } from './comonents/parameters/applicationParameters';
+
+import ModeSelect from './components/ModeSelect';
+import BookButtons from './containers/BookButtons';
+import Combinatoria from './components/Combinatoria'
 
 function App() {
-  
-  const selectedMode = RefApplicationParameterHook(SELECTED_MODE)
   
   return (
     <div className="App">
       <ModeSelect />
-      {selectedMode}
-
+      <div className='column-container'>
+        <BookButtons />
+      </div>
+        <Combinatoria />
     </div>
   );
 }

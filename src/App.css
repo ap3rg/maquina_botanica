@@ -1,13 +1,38 @@
-@import "~@blueprintjs/core/lib/css/blueprint.css";
+/* @import "~@blueprintjs/core/lib/css/blueprint.css"; */
 
 :root {
-  /* Paletter */
+  /* Paleta de colores versos */
+  --versos-1: rgb(0, 101, 148);
+  --versos-2: rgb(236, 98, 111);
+  --versos-3: rgb(128, 102, 87);
+  --versos-4: rgb(0, 107, 51);
+  --versos-5: rgb(66, 116, 185);
+  --versos-6: rgb(0, 171, 133);
+  --versos-7: rgb(240, 127, 90);
+  --versos-8: rgb(93, 68, 149);
+  --versos-9: rgb(62, 118, 99);
 
-  --primary-1: #15567fff;
-  --primary-2: #0b372cff;
+  /* Paleta de colores fondos */
+  --fondo-1: rgb(21, 24, 27);
+  --fondo-2: rgb(228, 226, 224);
+  --fondo-3: rgb(226, 222, 209);
+
+  /* Fuentes */
+  /* --fuente-1:  */
 
   /* Var Colors*/
   --title-color: var(--primary-1);
+  --active-button: rgb(255, 69, 122);
+  --inactive-button: rgba(0, 0, 0, 0);
+
+  /* Canvas */
+  /* A3 */
+  --svg-poster-height: 56vh;
+  --svg-poster-width: 40vh;
+
+  --svg-caos-height: 40vh;
+  --svg-caos-width: 56vh;
+
  
 }
 
@@ -47,5 +72,87 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.row-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.column-container {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  /* width: 20vw; */
+  align-items: center;
+  margin-bottom: 100px;
+
+
+}
+
+button {
+  background-color: white; 
+  border: 2px solid #373737;
+  color: rgb(0, 0, 0);
+  /* border-radius: 8px; */
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 10px;
+}
+
+.poster {
+  width: var(--svg-poster-width);
+  height: var(--svg-poster-height);
+}
+
+.caos {
+  width: var(--svg-caos-width);
+  height: var(--svg-caos-height);
+}
+
+.text {
+  font-family: "FF-Unit-Pro-Bold";
+}
+
+/* CSS */
+.button-52 {
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 20px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-52:after {
+  content: "";
+  background-color: #ffe54c;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.button-52:hover:after {
+  top: 0px;
+  left: 0px;
+}
+
+@media (min-width: 768px) {
+  .button-52 {
+    padding: 13px 50px 13px;
   }
 }

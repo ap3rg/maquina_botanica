@@ -11,3 +11,38 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: "FF-Unit-Pro";
+  src: local("FF-Unit-Pro-Bold"),
+   url("./fonts/FF-Unit-Pro/FF-Unit-Pro-Medium.otf") format("truetype");
+  font-weight: bold;
+  }
+
+@font-face {
+  font-family: "LiberationSans";
+  src: local("LiberationSans-Regular"),
+    url("./fonts/LiberationSans/LiberationSans-Regular.ttf") format("truetype");
+  font-weight: regular;
+}
+
+@font-face {
+  font-family: "LiberationSans";
+  src: local("LiberationSans-Bold"),
+    url("./fonts/LiberationSans/LiberationSans-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: local("OpenSans-SemiBold"),
+    url("./fonts/OpenSans/OpenSans-SemiBold.ttf") format("truetype");
+  font-weight: regular;
+  }
+
+@font-face {
+  font-family: "OpenSans";
+  src: local("OpenSans-Bold"),
+    url("./fonts/OpenSans/OpenSans-Bold.ttf") format("truetype");
+  font-weight: bold;
+  }
