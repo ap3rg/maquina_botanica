@@ -3,8 +3,7 @@ import * as d3 from 'd3'
 export function wrap(text, width) {
     text.each(function () {
         var text = d3.select(this),
-            words = text.text().split(/\s+/).reverse(),
-            word,
+            words = text.text().split(/\s+/),
             line = [],
             lineNumber = 0,
             lineHeight = 1.1, // ems
@@ -16,7 +15,7 @@ export function wrap(text, width) {
                         .attr("x", x)
                         .attr("y", y)
                         .attr("dy", dy + "em");
-        while (word = words.pop()) {
+        words.forEach(word => {
             line.push(word);
             tspan.text(line.join(" "));
             if (tspan.node().getComputedTextLength() > width) {
@@ -29,6 +28,6 @@ export function wrap(text, width) {
                             .attr("dy", ++lineNumber * lineHeight + dy + "em")
                             .text(word);
             }
-        }
+        })
     });
 }

@@ -1,9 +1,10 @@
 {
+
     "data": 
     [
         {
             "id": 1,
-            "name": "Diccionario universal de física",
+            "name": "Diccionario universal de física de Mathurin Jacques Brisson",
             "versos": [
                 "Siempre debemos esperar o temer alguna cosa de las mutaciones del aire.",
                 "Por medio del aire se transportan y distribuyen los manantiales de la fecundidad a las diferentes partes del mundo.",
@@ -49,7 +50,7 @@
         },
         {
             "id": 2,
-            "name": "Descripción de las plantas",
+            "name": "Descripción de las plantas de Antonio Josef Cavanilles",
             "versos": [
                 "Las raíces pueden mirarse como ramos subterráneos.",
                 "Infinitos sin tallo como las plantas sentadas.",            
@@ -71,7 +72,7 @@
         },
         {
             "id": 3,
-            "name": "Recueil des plants",
+            "name": "Recueil des plantes de María Sybilla Merían",
             "versos": [
                 "Zursal la fruta amarilla dentro de las pepitas negras y la médula blanca la oruga verde la ventana.",
                 "Hojas florecidas bajo el color de la fruta sahin rojo jaspeado con amarillo, el exterior de las hojas color de gusano de mar, el verde interior de la pradera, el borde rojizo; kakerlaque animales de color gris petir kakerlaque saliendo de su caparazón.",
@@ -91,7 +92,7 @@
         },
         {
             "id": 4,
-            "name": "Cartas físico matemáticas",
+            "name": "Cartas físico-matemáticas de Theodoro de Almeyda",
             "versos": [
                 "No siempre el orden natural de las materias es el órden natural con el que deben enseñarse.",
                 "Luego los ángulos opuestos por el vértice son iguales.", 
@@ -116,7 +117,7 @@
         },
         {
             "id": 5,
-            "name": "Cirujano instruido",
+            "name": "El cirujano instruido de Tomás Goular",
             "versos": [
                 "En digestión sobre fuego de arena.",
                 "La verdad es que las medicinas se parecen a los instrumentos.",

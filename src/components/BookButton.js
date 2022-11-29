@@ -1,19 +1,16 @@
-import { translateApplicationParamter } from "../utils/translateFunctions"
-import { useState } from 'react';
-import { useSelector} from "react-redux";
 
-
-
-const BookButton = ({ id, active, handleClick }) => {
-    const cleanName = translateApplicationParamter(id);
+const BookButton = ({ id, active, handleClick, backgorundImg }) => {
    
     return (  
             <button 
                 id={id}
-                className='button-52'
-                style={{backgroundColor: active ? 'var(--active-button)' : 'var(--inactive-button)'}}
+                className='bookButton'
+                // style={{backgroundColor: active ? 'var(--active-button)' : 'var(--inactive-button)'}}
+                style={{
+                    backgroundImage: `url(${backgorundImg})`,    
+                    opacity: active ? 1 : 0.3          
+                }}
                 onClick={() => handleClick(id)}>
-                {cleanName}
             </button>
     )
 }

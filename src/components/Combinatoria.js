@@ -8,29 +8,31 @@ import { newComposition } from '../store/actions'
 const Combinatoria = () => {
 
     const selectedMode = useSelector(state => state.mainStore.mode);
+    const combinations = useSelector(state => state.mainStore.combinations);
+    const layers = []
+
+    if(combinations.length > 0) {
+        layers.push({"id": ['0'], "layer": con.BACKGROUND_LAYER})
+
+        for(let l of Object.keys(con.LAYERS_BY_ID)) {
+            let posIds = [];
+            let layerIds = con.LAYERS_BY_ID[l]     
+            for(let c of combinations){
+                if(layerIds.includes(parseInt(c))){
+                    posIds.push(c)
+                }
+            }
+            layers.push({"id": posIds, "layer": l})
+        }
+        layers.push({"id": [combinations[0]], "layer": con.VERSOS_LAYER})
+    }
 
     const onClick = () => {
-        if (selectedMode === con.POSTER) {
-            newComposition([
-                con.BACKGROUND_LAYER,
-                con.FRAGMENTOS_BOTANICOS_LAYER,
-                con.FIGURAS_MATEMATICAS_LAYER,
-                con.VERSOS_LAYER])
-        } else if (selectedMode === con.CAOS) {
-            newComposition([
-                con.BACKGROUND_LAYER,
-                con.FRAGMENTOS_BOTANICOS_LAYER,
-                con.FIGURAS_MATEMATICAS_LAYER,
-                con.FIGURAS_TEXTURAS_LAYER,
-                con.FIGURAS_BOTANICAS_LAYER,
-                con.FIGURAS_CODIGOS_LAYER,
-                con.FIGURAS_MALU_LAYER,
-                con.VERSOS_LAYER])
-        }
+        newComposition(layers)
     }
 
     return (  
-        <div> 
+        <div className='column-container'> 
             <div> 
                 {selectedMode === con.POSTER ? <Poster /> : <Caos /> }
             </div> 

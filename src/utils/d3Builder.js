@@ -1,5 +1,4 @@
 import * as con from "../Constants"
-import { functionFromString } from "./functionFromString";
 import { wrap } from "./d3Functions";
 
 
@@ -32,8 +31,10 @@ class d3Builder {
          case con.FIGURAS_MATEMATICAS_LAYER: this.addFiguraMatematica(params); break;
          case con.FIGURAS_BOTANICAS_LAYER: this.addFiguraBotanica(params); break;
          case con.FIGURAS_CODIGOS_LAYER: this.addFiguraCodigo(params); break;
+         case con.FIGURAS_VERSOS_LAYER: this.addFiguraVerso(params); break;
          case con.FIGURAS_TEXTURAS_LAYER: this.addTextura(params); break;
          case con.FIGURAS_MALU_LAYER: this.addFiguraMalu(params); break;
+         default: break;
         }
      }
      
@@ -79,7 +80,7 @@ class d3Builder {
         let width = args['width'];
         let x = args['x'];
         let y = args['y'];
-        let fontSize = args['font-size'];
+        let fontSize = 1.3;
         let coin = args['coin']
 
 
@@ -215,7 +216,7 @@ class d3Builder {
         let textSource = sources
         let text = this.mode === con.POSTER ? con.BIBLIOGRAPHY_POSTER : con.BIBLIOGRAPHY_CAOS; 
         let width = this.mode === con.POSTER ? con.POSTER_VIEWBOX_WIDTH : con.CAOS_VIEWBOX_WIDTH;
-        let height = this.mode === con.POSTER ? con.POSTER_VIEWBOX_HEIGHT : con.CAOS_VIEWBOX_HEIGHT
+        let height = this.mode === con.POSTER ? con.POSTER_VIEWBOX_HEIGHT : con.CAOS_VIEWBOX_HEIGHT;
         
 
         this.canvasRef.append("text")
@@ -228,16 +229,18 @@ class d3Builder {
             .text(text);
             
         
-        textSource.map((i, c) => {
+        textSource.forEach((t, i) => {
             this.canvasRef.append("text")
                 .attr("x", 3)
-                .attr("y", height - (4* (c + 1)))
+                .attr("y", height - (4* (i + 1)))
                 .attr("fill", color)
                 .attr("font-size", 0.2 + "vw")
                 .attr("font-family", fontFamily)
                 .attr("font-weight", fontWeight)
-                .text(i)
-        })
+                .text(t)
+            }
+
+        )
     }
 
     addFiguraBotanica = (args) => {
@@ -247,7 +250,11 @@ class d3Builder {
         let y = args["y"]
         let width = args['width']
         if(this.mode === con.POSTER) {
-            // Not Implemented        
+            this.canvasRef.append("svg:image")
+            .attr("xlink:href", img)
+            .attr("x", x)
+            .attr("y", y)
+            .attr("width", width) 
         } else if(this.mode === con.CAOS) {
             this.canvasRef.append("svg:image")
             .attr("xlink:href", img)
@@ -265,7 +272,33 @@ class d3Builder {
         let y = args["y"]
         let width = args['width']
         if(this.mode === con.POSTER) {
-            // Not Implemented        
+            this.canvasRef.append("svg:image")
+            .attr("xlink:href", img)
+            .attr("x", x)
+            .attr("y", y)
+            .attr("width", width)    
+        } else if(this.mode === con.CAOS) {
+            this.canvasRef.append("svg:image")
+            .attr("xlink:href", img)
+            .attr("x", x)
+            .attr("y", y)
+            .attr("width", width)         
+        }
+
+    }
+
+    addFiguraVerso = (args) => {
+        let imgPath = args['img'];
+        let img = require(`./../resources/fv/${imgPath}.png`)
+        let x = args["x"]
+        let y = args["y"]
+        let width = args['width']
+        if(this.mode === con.POSTER) {
+            this.canvasRef.append("svg:image")
+            .attr("xlink:href", img)
+            .attr("x", x)
+            .attr("y", y)
+            .attr("width", width)    
         } else if(this.mode === con.CAOS) {
             this.canvasRef.append("svg:image")
             .attr("xlink:href", img)
@@ -279,19 +312,25 @@ class d3Builder {
     addTextura = (args) => {
         let imgPath = args['img'];
         let img = require(`./../resources/ft/${imgPath}.jpg`)
-        let x = args["x"]
-        let y = args["y"]
-        let width = args['width']
-        if(this.mode === con.POSTER) {
-            // Not Implemented        
-        } else if(this.mode === con.CAOS) {
-            this.canvasRef.append("svg:image")
-            .attr("xlink:href", img)
-            .attr("x", 0)
-            .attr("y", 0)
-            .attr("width", con.CAOS_VIEWBOX_WIDTH)  
-            .style("opacity", 0.2)       
+        let coin = args['coin']
+        if(coin) {
+            if(this.mode === con.POSTER) {
+                this.canvasRef.append("svg:image")
+                .attr("xlink:href", img)
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("width", con.CAOS_VIEWBOX_WIDTH)  
+                .style("opacity", 0.2)    
+            } else if(this.mode === con.CAOS) {
+                this.canvasRef.append("svg:image")
+                .attr("xlink:href", img)
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("width", con.CAOS_VIEWBOX_WIDTH)  
+                .style("opacity", 0.2)       
+            }
         }
+
 
     }
 
@@ -302,7 +341,7 @@ class d3Builder {
         let y = args["y"]
         let width = args['width']
         if(this.mode === con.POSTER) {
-            // Not Implemented        
+           // To Implement
         } else if(this.mode === con.CAOS) {
             this.canvasRef.append("svg:image")
             .attr("xlink:href", img)

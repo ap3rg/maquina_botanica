@@ -8,11 +8,11 @@ function App() {
   
   return (
     <div className="App">
-      <ModeSelect />
-      <div className='column-container'>
+      <div className='row-container'>
         <BookButtons />
-      </div>
         <Combinatoria />
+        <ModeSelect />
+      </div>
     </div>
   );
 }

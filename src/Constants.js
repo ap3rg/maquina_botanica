@@ -33,6 +33,23 @@ export const FIGURAS_VERSOS_LAYER = 'figuras-versos'
 export const FIGURAS_TEXTURAS_LAYER = 'figuras-texturas'
 export const FIGURAS_MALU_LAYER = 'figuras-malu'
 
+// export const LAYERS_BY_ID = {
+//     BOOK_1 : [FIGURAS_VERSOS_LAYER, FIGURAS_TEXTURAS_LAYER],
+//     BOOK_2 : [FIGURAS_VERSOS_LAYER, FIGURAS_TEXTURAS_LAYER],
+//     BOOK_3 : [FRAGMENTOS_BOTANICOS_LAYER, FIGURAS_BOTANICAS_LAYER, FIGURAS_CODIGOS_LAYER],
+//     BOOK_4 : [FIGURAS_MATEMATICAS_LAYER],
+//     BOOK_5 : [FIGURAS_VERSOS_LAYER, FIGURAS_TEXTURAS_LAYER],
+// }
+
+export const LAYERS_BY_ID = {
+    [FIGURAS_VERSOS_LAYER]: [1, 2, 3, 5],
+    [FIGURAS_TEXTURAS_LAYER]: [1, 2, 3, 5],
+    [FRAGMENTOS_BOTANICOS_LAYER]: [3],
+    [FIGURAS_BOTANICAS_LAYER]: [3],
+    [FIGURAS_CODIGOS_LAYER]: [3],
+    [FIGURAS_MATEMATICAS_LAYER]: [4]
+}
+
 // Backgrounds
 export const BACKGROUNDS = [
     'var(--fondo-1)', 
@@ -71,7 +88,6 @@ const fragmentos_botanicos = []
 for(let i = 1; i <= numFragmentos; i++) {
     fragmentos_botanicos.push("fb-" + i)
 }
-export const FRAGMENTOS_BOTANICOS = fragmentos_botanicos
 
 // Figuras matematics
 const numFiguras = 74
@@ -79,7 +95,6 @@ const figuras_matematicas = []
 for(let i = 1; i <= numFiguras; i++) {
     figuras_matematicas.push("fm-" + i)
 }
-export const FIGURAS_MATEMATICAS = figuras_matematicas
 export const POSTER_ROTATION_ANGLES = [0, 90, 180, 360]
 export const CAOS_ROTATION_ANGLES = [0, 45, 90, 80, 180, 120, 265, 360]
 
@@ -89,7 +104,6 @@ const cartas_botanicas = []
 for(let i = 1; i <= numCartas; i++) {
     cartas_botanicas.push("cb-" + i)
 }
-export const CARTAS_BOTANICAS = cartas_botanicas
 
 // Figuras codigos
 const numCodigos = 26
@@ -97,15 +111,33 @@ const figuras_codigos = []
 for(let i = 1; i <= numCodigos; i++) {
     figuras_codigos.push("fc-" + i)
 }
-export const FIGURAS_CODIGOS = figuras_codigos
 
 // Figuras texturas
-const numTexturas = 38
-const figuras_texturas = []
-for(let i = 1; i <= numTexturas; i++) {
-    figuras_texturas.push("ft-" + i)
+// [... start index of each book, finish index (non-inclusive)...]
+const numTexturas = [1, 8, 18, 25, 31, 37]
+const textosTexturasIds = []
+for(let i=0; i < numTexturas.length; i++) {
+    let array = []
+    let start = numTexturas[i]
+    let num = numTexturas[i + 1]
+    for(let i = start; i < num; i++) {
+        array.push("ft-" + i)
+    }
+    textosTexturasIds.push(array)
 }
-export const FIGURAS_TEXTURAS = figuras_texturas
+
+// Figuras versos
+const numVersos = [1, 23, 48, 68, 91, 102]
+const textosVersosIds = []
+    for(let i=0; i < numVersos.length; i++) {
+        let array = []
+        let start = numVersos[i]
+        let num = numVersos[i + 1]
+        for(let i = start; i < num; i++) {
+            array.push("fv-" + i)
+        }
+        textosVersosIds.push(array)
+    }
 
 // Figuras malu
 const numFigurasMalu = 2
@@ -114,6 +146,34 @@ for(let i = 1; i <= numFigurasMalu; i++) {
     figuras_malu.push("fmalu-" + i)
 }
 export const FIGURAS_MALU = figuras_malu
+
+
+export const FIGURES = {
+    [FIGURAS_TEXTURAS_LAYER] : {
+        1 : textosTexturasIds[0],
+        2 : textosTexturasIds[1],
+        3 : textosTexturasIds[2],
+        5 : textosTexturasIds[3],
+    },
+    [FRAGMENTOS_BOTANICOS_LAYER] : {
+        3: fragmentos_botanicos,
+    },
+    [FIGURAS_BOTANICAS_LAYER] : {
+        3 : cartas_botanicas
+    },
+    [FIGURAS_CODIGOS_LAYER] : {
+        3 : figuras_codigos
+    },
+    [FIGURAS_MATEMATICAS_LAYER] : {
+        4: figuras_matematicas
+    },
+    [FIGURAS_VERSOS_LAYER] : {
+        1 : textosVersosIds[0],
+        2 : textosVersosIds[1],
+        3 : textosVersosIds[2],
+        5 : textosVersosIds[3],
+    }
+}
 
 // Poster constants
 export const POSTER_VIEWBOX_WIDTH = 100
