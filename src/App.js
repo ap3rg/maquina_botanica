@@ -9,9 +9,9 @@ function App() {
   return (
     <div className="App">
       <div className='row-container'>
-        <BookButtons />
-        <Combinatoria />
         <ModeSelect />
+        <Combinatoria />
+        <BookButtons />
       </div>
     </div>
   );

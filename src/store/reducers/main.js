@@ -1,4 +1,5 @@
 import * as con from "../../Constants"
+import * as utils from "../../utils/generalFunctions"
 import versosJson from "../../resources/versos.json"
 
 const innitState = {
@@ -6,22 +7,6 @@ const innitState = {
     [con.COMBINATIONS]: [],
     [con.LAYERS]: [],
     [con.VERSOS]: versosJson.data,
-}
-
-const randNumRange = (min, max) => {
-    return Math.random() * (max - min) + min;
-}
-
-const getXPosition = (width, divisor) => {
-    let x = randNumRange(0, (width / divisor));
-
-    return x
-}
-
-const getYPosition = (height, divisor) => {
-    let y = randNumRange(0, (height / divisor));
-
-    return y
 }
 
 const newLayer = (layers, state) => {
@@ -52,7 +37,7 @@ const newLayer = (layers, state) => {
 
         id = parseInt(id)
         let layer = {}
-        let coin = randNumRange(0, 1) > 0.5 ? true : false
+        let coin = utils.randNumRange(0, 1) > 0.5 ? true : false
         let figuras;
         let figura;
         let x;
@@ -103,16 +88,16 @@ const newLayer = (layers, state) => {
                 let textWidth;
                 let fontSize;
                 if (state.mode === con.POSTER) {
-                    textWidth = randNumRange(con.POSTER_VIEWBOX_WIDTH / 3, con.POSTER_VIEWBOX_WIDTH)
+                    textWidth = utils.randNumRange(con.POSTER_VIEWBOX_WIDTH / 3, con.POSTER_VIEWBOX_WIDTH)
                     x = con.POSTER_TEXT_POSX;
                     y = con.POSTER_TEXT_POSY;
                     fontSize = 0;
 
                 } else if (state.mode === con.CAOS) {
-                    textWidth = randNumRange(con.CAOS_VIEWBOX_WIDTH / 3, con.CAOS_VIEWBOX_WIDTH)
-                    x = randNumRange(5, (con.CAOS_VIEWBOX_WIDTH - textWidth));
-                    y = randNumRange(5, con.CAOS_VIEWBOX_HEIGHT / 2);
-                    fontSize = randNumRange(2, 10);
+                    textWidth = utils.randNumRange(con.CAOS_VIEWBOX_WIDTH / 3, con.CAOS_VIEWBOX_WIDTH)
+                    x = utils.randNumRange(5, (con.CAOS_VIEWBOX_WIDTH - textWidth));
+                    y = utils.randNumRange(5, con.CAOS_VIEWBOX_HEIGHT / 2);
+                    fontSize = utils.randNumRange(2, 10);
                 }
                 
                 layer[con.VERSOS_LAYER] = {
@@ -137,8 +122,8 @@ const newLayer = (layers, state) => {
 
                 // Position
                 if(mode === con.POSTER){
-                    x = getXPosition(con.POSTER_VIEWBOX_WIDTH, 4);
-                    y =  getYPosition(con.POSTER_VIEWBOX_HEIGHT, 4);
+                    x = utils.getXPosition(con.POSTER_VIEWBOX_WIDTH, 4);
+                    y =  utils.getYPosition(con.POSTER_VIEWBOX_HEIGHT, 4);
                     layer[con.FRAGMENTOS_BOTANICOS_LAYER] = {
                         "img" : figura, 
                         "x": x, 
@@ -147,13 +132,13 @@ const newLayer = (layers, state) => {
                         "coin": coin
                     }
                 } else if(mode === con.CAOS) {
-                    x = getXPosition(con.CAOS_VIEWBOX_WIDTH, 4);
-                    y =  getYPosition(con.CAOS_VIEWBOX_HEIGHT, 4);
+                    x = utils.getXPosition(con.CAOS_VIEWBOX_WIDTH, 4);
+                    y =  utils.getYPosition(con.CAOS_VIEWBOX_HEIGHT, 4);
                     layer[con.FRAGMENTOS_BOTANICOS_LAYER] = {
                         "img" : figura, 
                         "x": x, 
                         "y": y,
-                        "width": randNumRange(con.POSTER_VIEWBOX_WIDTH / 6, (5 * con.POSTER_VIEWBOX_WIDTH / 6)),
+                        "width": utils.randNumRange(con.POSTER_VIEWBOX_WIDTH / 6, (5 * con.POSTER_VIEWBOX_WIDTH / 6)),
                         "coin": coin
                     }
                 }
@@ -170,8 +155,8 @@ const newLayer = (layers, state) => {
                 figura = figuras[Math.floor(Math.random()*figuras.length)];
                 // Position
                 if(mode === con.POSTER){
-                    x = getXPosition(con.POSTER_VIEWBOX_WIDTH, 10);
-                    y =  getYPosition(con.POSTER_VIEWBOX_HEIGHT, 10);
+                    x = utils.getXPosition(con.POSTER_VIEWBOX_WIDTH, 10);
+                    y =  utils.getYPosition(con.POSTER_VIEWBOX_HEIGHT, 10);
                     layer[con.FIGURAS_MATEMATICAS_LAYER] = {
                         "img" : figura, 
                         "x": x, 
@@ -181,8 +166,8 @@ const newLayer = (layers, state) => {
                     }
                 } else if(mode === con.CAOS) {
                     
-                    x = getXPosition(con.CAOS_VIEWBOX_WIDTH, 10);
-                    y =  getYPosition(con.CAOS_VIEWBOX_HEIGHT, 10);
+                    x = utils.getXPosition(con.CAOS_VIEWBOX_WIDTH, 10);
+                    y =  utils.getYPosition(con.CAOS_VIEWBOX_HEIGHT, 10);
                     layer[con.FIGURAS_MATEMATICAS_LAYER] = {
                         "img" : figura, 
                         "x": x, 
@@ -197,9 +182,9 @@ const newLayer = (layers, state) => {
                 figuras = con.FIGURES[con.FIGURAS_BOTANICAS_LAYER][id]
                 figura = figuras[Math.floor(Math.random()*figuras.length)];
                 if(mode === con.POSTER){
-                    width = randNumRange(con.POSTER_VIEWBOX_WIDTH / 10, (4 * con.POSTER_VIEWBOX_WIDTH / 10));
-                    x = randNumRange(10, con.POSTER_VIEWBOX_WIDTH - width);
-                    y =  randNumRange(10, con.POSTER_VIEWBOX_HEIGHT - (2*width));
+                    width = utils.randNumRange(con.POSTER_VIEWBOX_WIDTH / 10, (4 * con.POSTER_VIEWBOX_WIDTH / 10));
+                    x = utils.randNumRange(10, con.POSTER_VIEWBOX_WIDTH - width);
+                    y =  utils.randNumRange(10, con.POSTER_VIEWBOX_HEIGHT - (2*width));
                     layer[con.FIGURAS_BOTANICAS_LAYER] = {
                         "img" : figura, 
                         "x": x, 
@@ -208,9 +193,9 @@ const newLayer = (layers, state) => {
                         "coin": coin
                         }
                 } else if(mode === con.CAOS) {
-                    width = randNumRange(con.CAOS_VIEWBOX_WIDTH / 10, (4 * con.CAOS_VIEWBOX_WIDTH / 10));
-                    x = randNumRange(10, con.CAOS_VIEWBOX_WIDTH - width);
-                    y =  randNumRange(10, con.CAOS_VIEWBOX_HEIGHT - (2*width));
+                    width = utils.randNumRange(con.CAOS_VIEWBOX_WIDTH / 10, (4 * con.CAOS_VIEWBOX_WIDTH / 10));
+                    x = utils.randNumRange(10, con.CAOS_VIEWBOX_WIDTH - width);
+                    y =  utils.randNumRange(10, con.CAOS_VIEWBOX_HEIGHT - (2*width));
                     layer[con.FIGURAS_BOTANICAS_LAYER] = {
                         "img" : figura, 
                         "x": x, 
@@ -224,9 +209,9 @@ const newLayer = (layers, state) => {
                 figuras = con.FIGURES[con.FIGURAS_CODIGOS_LAYER][id]
                 figura = figuras[Math.floor(Math.random()*figuras.length)];
 
-                width = randNumRange(con.CAOS_VIEWBOX_WIDTH / 12, (4 * con.CAOS_VIEWBOX_WIDTH / 12));
-                x = randNumRange(10, con.CAOS_VIEWBOX_WIDTH - width);
-                y =  randNumRange(10, con.CAOS_VIEWBOX_HEIGHT - (2*width));
+                width = utils.randNumRange(con.CAOS_VIEWBOX_WIDTH / 12, (4 * con.CAOS_VIEWBOX_WIDTH / 12));
+                x = utils.randNumRange(10, con.CAOS_VIEWBOX_WIDTH - width);
+                y =  utils.randNumRange(10, con.CAOS_VIEWBOX_HEIGHT - (2*width));
                 layer[con.FIGURAS_CODIGOS_LAYER] = {
                     "img" : figura, 
                     "x": x, 
@@ -239,9 +224,9 @@ const newLayer = (layers, state) => {
                 figuras = con.FIGURES[con.FIGURAS_VERSOS_LAYER][id]
                 figura = figuras[Math.floor(Math.random()*figuras.length)];
 
-                width = randNumRange(con.CAOS_VIEWBOX_WIDTH / 12, (4 * con.CAOS_VIEWBOX_WIDTH / 12));
-                x = randNumRange(10, con.CAOS_VIEWBOX_WIDTH - width);
-                y =  randNumRange(10, con.CAOS_VIEWBOX_HEIGHT - (2*width));
+                width = utils.randNumRange(con.CAOS_VIEWBOX_WIDTH / 12, (4 * con.CAOS_VIEWBOX_WIDTH / 12));
+                x = utils.randNumRange(10, con.CAOS_VIEWBOX_WIDTH - width);
+                y =  utils.randNumRange(10, con.CAOS_VIEWBOX_HEIGHT - (2*width));
                 layer[con.FIGURAS_VERSOS_LAYER] = {
                     "img" : figura, 
                     "x": x, 
@@ -254,9 +239,9 @@ const newLayer = (layers, state) => {
                     figuras = con.FIGURES[con.FIGURAS_TEXTURAS_LAYER][id]
                     figura = figuras[Math.floor(Math.random()*figuras.length)];
 
-                    width = randNumRange(con.CAOS_VIEWBOX_WIDTH / 12, (4 * con.CAOS_VIEWBOX_WIDTH / 12));
-                    x = randNumRange(10, con.CAOS_VIEWBOX_WIDTH - width);
-                    y =  randNumRange(10, con.CAOS_VIEWBOX_HEIGHT - (2*width));
+                    width = utils.randNumRange(con.CAOS_VIEWBOX_WIDTH / 12, (4 * con.CAOS_VIEWBOX_WIDTH / 12));
+                    x = utils.randNumRange(10, con.CAOS_VIEWBOX_WIDTH - width);
+                    y =  utils.randNumRange(10, con.CAOS_VIEWBOX_HEIGHT - (2*width));
                     layer[con.FIGURAS_TEXTURAS_LAYER] = {
                         "img" : figura, 
                         "x": x, 
@@ -270,9 +255,9 @@ const newLayer = (layers, state) => {
                 figuras = con.FIGURAS_MALU[id]
                 figura = figuras[Math.floor(Math.random()*figuras.length)];
 
-                width = randNumRange(con.CAOS_VIEWBOX_WIDTH / 12, (4 * con.CAOS_VIEWBOX_WIDTH / 12));
-                x = randNumRange(10, con.CAOS_VIEWBOX_WIDTH - width);
-                y =  randNumRange(10, con.CAOS_VIEWBOX_HEIGHT - (2*width));
+                width = utils.randNumRange(con.CAOS_VIEWBOX_WIDTH / 12, (4 * con.CAOS_VIEWBOX_WIDTH / 12));
+                x = utils.randNumRange(10, con.CAOS_VIEWBOX_WIDTH - width);
+                y =  utils.randNumRange(10, con.CAOS_VIEWBOX_HEIGHT - (2*width));
                 layer[con.FIGURAS_MALU_LAYER] = {
                     "img" : figura, 
                     "x": x, 
@@ -300,8 +285,24 @@ const mainReducer = (state = innitState, action) => {
                 return {...state, [con.MODE] : con.CAOS}
             }
         case 'NEW_COMPOSITION':
-            let layers = newLayer(action.payload, state)
-            return {...state, [con.LAYERS] : layers}
+            const layers = []
+            if(state.combinations.length > 0) {
+                layers.push({"id": ['0'], "layer": con.BACKGROUND_LAYER})
+        
+                for(let l of Object.keys(con.LAYERS_BY_ID)) {
+                    let posIds = [];
+                    let layerIds = con.LAYERS_BY_ID[l]     
+                    for(let c of state.combinations){
+                        if(layerIds.includes(parseInt(c))){
+                            posIds.push(c)
+                        }
+                    }
+                    layers.push({"id": posIds, "layer": l})
+                }
+                layers.push({"id": [state.combinations[0]], "layer": con.VERSOS_LAYER})
+            } 
+            let finalLayers = newLayer(layers, state)
+            return {...state, [con.LAYERS] : finalLayers}
         case 'RESET':
             return {...state, [con.COMBINATIONS] : []}
         case 'APPEND':
@@ -312,7 +313,7 @@ const mainReducer = (state = innitState, action) => {
         case 'POP':
             currentCombinations = state[con.COMBINATIONS]
             currentCombinations = currentCombinations.filter(function(e) { return e !== action.payload })
-            return {...state, [con.COMBINATIONS] : [...currentCombinations]}            
+            return {...state, [con.COMBINATIONS] : [...currentCombinations]}   
         default:
             return state
     }

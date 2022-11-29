@@ -20,6 +20,8 @@
   /* Buttons */
   --button-width: 100px;
   --button-height: 130px;
+  --button-color: rgb(105, 243, 90);
+  --button-border: 5px solid rgb(255, 247, 0);
 
   /* Var Colors*/
   --title-color: var(--primary-1);
@@ -97,6 +99,8 @@
   width: var(--button-width);
   height: var(--button-height);
   border: white;
+  margin-top: 10px;
+
 }
 
 .poster {
@@ -131,7 +135,7 @@
 
 .button-52:after {
   content: "";
-  background-color: #69F35A;
+  background-color: var(--button-color);
   width: 100%;
   z-index: -1;
   position: absolute;
@@ -236,18 +240,20 @@ svg {
 }
 
 .switch-vertical label {
+  position: relative;
   font-size: 15px;
   line-height: 30px;
   display: block;
   width: 80px;
   height: 50%;
   margin: 0;
-  text-align: left;
+  text-align: right;
   padding-left: 12px;
+  right: 120px;
 }
 
 .switch-vertical .toggle-outside {
-  background: rgba(81, 81, 81, 0.5);
+  background: rgba(6, 6, 6, 0.5);
   position: absolute;
   width: 23px;
   height: 100%;

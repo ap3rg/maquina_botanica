@@ -82,11 +82,16 @@ class d3Builder {
         let y = args['y'];
         let fontSize = 1.3;
         let coin = args['coin']
-
-
         
         let numWords = verso1.split(/\s+/).length;
+        let scaleFactor =1;
         
+        // implementacion mayusculas
+        if(coin) {
+            verso1 = verso1.toUpperCase();
+            scaleFactor = 0.89
+
+        }
                     
         let fontFamily = args['font-family'];
         let fontWeight = args['font-weight'];
@@ -118,7 +123,7 @@ class d3Builder {
                 .attr("x", x)
                 .attr("y", y)
                 .attr("fill", color1)
-                .attr("font-size", 10 * fontSize + 'px')
+                .attr("font-size", 10 * scaleFactor * fontSize + 'px')
                 .attr("font-family", fontFamily)
                 .attr("font-weight", fontWeight)
                 .text(verso1)
@@ -220,7 +225,7 @@ class d3Builder {
         
 
         this.canvasRef.append("text")
-            .attr("x", width - 80)
+            .attr("x", width - 70)
             .attr("y", 4)
             .attr("fill", color)
             .attr("font-size", 0.2 + "vw")

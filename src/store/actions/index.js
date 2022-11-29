@@ -20,6 +20,12 @@ export const removeBook = (book) => {
     });
 };
 
+export const initialComposition = () => {
+    store.dispatch({
+        type: 'INIT_COMP',
+    })
+}
+
 export const newComposition = (layerObjs) => {
     store.dispatch({
         type: 'NEW_COMPOSITION',

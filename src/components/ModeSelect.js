@@ -9,9 +9,9 @@ export default function ModeSelect() {
     return (
         <div className="toggle-switch-container">
             <div className="toggle-switch switch-vertical">
-            <input id={con.CAOS} type="radio" name="switch" checked={selectedMode === con.CAOS ? "checked" : null} onChange={() => {switchMode()}}/>
+            <input id={con.CAOS} type="radio" name="switch" checked={selectedMode === con.CAOS ? "checked" : ''} onChange={() => {switchMode()}}/>
             <label htmlFor={con.CAOS}>{translateApplicationParamter(con.CAOS)}</label>
-            <input id={con.POSTER} type="radio" name="switch" checked={selectedMode === con.POSTER ? "checked" : null} onChange={() => {switchMode()}}/>
+            <input id={con.POSTER} type="radio" name="switch" checked={selectedMode === con.POSTER ? "checked" : ''} onChange={() => {switchMode()}}/>
             <label htmlFor={con.POSTER}>{translateApplicationParamter(con.POSTER)}</label>
             <span className="toggle-outside">
                 <span className="toggle-inside"></span>
