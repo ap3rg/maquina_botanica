@@ -153,6 +153,8 @@ export const FIGURES = {
     }
 }
 
+// exclude = ["fm-60-99-100.png", "fm-62-112-113.png", "fm-61-197-86.png"]
+
 // Poster constants
 export const POSTER_VIEWBOX_WIDTH = 100
 export const POSTER_VIEWBOX_HEIGHT = 140

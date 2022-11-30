@@ -45,6 +45,7 @@ const newLayer = (layers, state) => {
         let width;
         let wh;
         let maxWidth;
+        let scaling = 1;
 
 
         switch(l) {
@@ -100,7 +101,8 @@ const newLayer = (layers, state) => {
                     textWidth = utils.randNumRange(con.CAOS_VIEWBOX_WIDTH / 3, con.CAOS_VIEWBOX_WIDTH)
                     x = utils.randNumRange(5, (con.CAOS_VIEWBOX_WIDTH - textWidth));
                     y = utils.randNumRange(5, con.CAOS_VIEWBOX_HEIGHT / 2);
-                    fontSize = utils.randNumRange(2, 10);
+                    fontSize = utils.randNumRange(0, 1);
+                    
                 }
                 
                 layer[con.VERSOS_LAYER] = {
@@ -128,9 +130,10 @@ const newLayer = (layers, state) => {
 
                 // Position
                 if(mode === con.POSTER){
-                    width = maxWidth < (3 * con.POSTER_VIEWBOX_WIDTH / 7) ? maxWidth : (3 * con.POSTER_VIEWBOX_WIDTH / 7)
-                    x = utils.getXPosition(con.POSTER_VIEWBOX_WIDTH, 4);
-                    y =  utils.getYPosition(con.POSTER_VIEWBOX_HEIGHT, 4);
+                    // width = maxWidth < (3 * con.POSTER_VIEWBOX_WIDTH / 7) ? maxWidth : (3 * con.POSTER_VIEWBOX_WIDTH / 7)
+                    width = utils.randNumRange(con.POSTER_VIEWBOX_WIDTH / 3, 2 * con.POSTER_VIEWBOX_WIDTH / 3) //* scaling 
+                    x = utils.randNumRange(0, con.POSTER_VIEWBOX_WIDTH- (con.POSTER_VIEWBOX_WIDTH / 3));
+                    y =  utils.randNumRange(0, con.POSTER_VIEWBOX_HEIGHT - (con.POSTER_VIEWBOX_HEIGHT / 3));
                     layer[con.FRAGMENTOS_BOTANICOS_LAYER] = {
                         "img" : figura, 
                         "x": x, 
@@ -163,10 +166,22 @@ const newLayer = (layers, state) => {
 
                 wh = utils.getImgSize(figura);
                 maxWidth = wh[0];
+                if(maxWidth < 100) {
+                    scaling = 0.05
+                } else if (maxWidth < 150) {
+                    scaling = 0.1
+                } else if (maxWidth < 200) {
+                    scaling = 0.2
+                } else if (maxWidth < 300) {
+                    scaling = 0.5
+                } else if (maxWidth < 500) {
+                    scaling = 0.7
+                } else if (maxWidth < 600) {
+                    scaling = 0.8
+                }
                 // Position
                 if(mode === con.POSTER){
-
-                    width = maxWidth < con.POSTER_VIEWBOX_WIDTH ? maxWidth : con.POSTER_VIEWBOX_WIDTH
+                    width = con.POSTER_VIEWBOX_WIDTH * scaling;
 
                     x = utils.randNumRange(0, con.POSTER_VIEWBOX_WIDTH / 2);
                     y = utils.randNumRange(0, con.POSTER_VIEWBOX_HEIGHT / 3);
@@ -179,7 +194,7 @@ const newLayer = (layers, state) => {
                         "width": width
                     }
                 } else if(mode === con.CAOS) {
-                    width = maxWidth < con.CAOS_VIEWBOX_WIDTH ? maxWidth : con.CAOS_VIEWBOX_WIDTH
+                    width = con.CAOS_VIEWBOX_WIDTH * scaling;
                     x = utils.randNumRange(0, con.CAOS_VIEWBOX_WIDTH / 2);
                     y = utils.randNumRange(0, con.CAOS_VIEWBOX_HEIGHT / 3);
                     layer[con.FIGURAS_MATEMATICAS_LAYER] = {
@@ -201,11 +216,10 @@ const newLayer = (layers, state) => {
                 maxWidth = wh[0];
                 if(mode === con.POSTER){
 
-                    width = utils.randNumRange(con.POSTER_VIEWBOX_WIDTH / 10, (4 * con.POSTER_VIEWBOX_WIDTH / 10));
-                    width = maxWidth < width ? maxWidth : width;
+                    width = utils.randNumRange(20, 100)
 
-                    x = utils.randNumRange(10, con.POSTER_VIEWBOX_WIDTH - width);
-                    y =  utils.randNumRange(10, con.POSTER_VIEWBOX_HEIGHT - (2*width));
+                    x = utils.randNumRange(0, con.POSTER_VIEWBOX_WIDTH- (con.POSTER_VIEWBOX_WIDTH / 6));
+                    y =  utils.randNumRange(0, con.POSTER_VIEWBOX_HEIGHT - (con.POSTER_VIEWBOX_HEIGHT / 6));
                     layer[con.FIGURAS_BOTANICAS_LAYER] = {
                         "img" : figura, 
                         "x": x, 
@@ -214,7 +228,7 @@ const newLayer = (layers, state) => {
                         "coin": coin
                         }
                 } else if(mode === con.CAOS) {
-                    width = utils.randNumRange(con.CAOS_VIEWBOX_WIDTH / 10, (4 * con.CAOS_VIEWBOX_WIDTH / 10));
+                    width = utils.randNumRange(3 * con.CAOS_VIEWBOX_WIDTH / 10, (6 * con.CAOS_VIEWBOX_WIDTH / 10));
                     width = maxWidth < width ? maxWidth : width;
 
                     x = utils.randNumRange(10, con.CAOS_VIEWBOX_WIDTH - width);

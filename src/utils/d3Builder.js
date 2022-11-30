@@ -80,7 +80,7 @@ class d3Builder {
         let width = args['width'];
         let x = args['x'];
         let y = args['y'];
-        let fontSize = 1.3;
+        let fontSize = args['font-size'];
         let coin = args['coin']
         
         let numWords = verso1.split(/\s+/).length;
@@ -98,46 +98,51 @@ class d3Builder {
 
         if(this.mode === con.POSTER) {
             // Extract color
-            
-            if(numWords > 50) {
-                fontSize = 0.58
-            } else if(numWords > 40) {
-                fontSize = 0.6
-            } else if(numWords > 35) {
-                fontSize = 0.7
-            } else if(numWords > 30) {
-                fontSize = 0.8
-            } else if(numWords > 25) {
-                fontSize = 0.9
-            } else if(numWords > 20) {
-                fontSize = 1
-            } else if(numWords > 15) {
-                fontSize = 1.1
-            } else if(numWords > 10) {
-                fontSize = 1.18
-            } else if(numWords > 5) {
+            let fontSize = 0.5
+
+
+            if(numWords < 5) {
                 fontSize = 1.3
+            } else if(numWords < 10) {
+                fontSize = 1.18
+            } else if(numWords < 15) {
+                fontSize = 1.12
+            } else if(numWords < 20) {
+                fontSize = 1.1
+            } else if(numWords < 25) {
+                fontSize = 1.05
+            } else if(numWords < 30) {
+                fontSize = 0.9
+            } else if(numWords < 35) {
+                fontSize = 0.83
+            } else if(numWords < 40) {
+                fontSize = 0.8
+            } else if(numWords < 50) {
+                fontSize = 0.7
+            } else {
+                fontSize = 0.55
             }
+
+            fontSize = 10 * scaleFactor * fontSize
         
             this.canvasRef.append("text")
                 .attr("x", x)
                 .attr("y", y)
                 .attr("fill", color1)
-                .attr("font-size", 10 * scaleFactor * fontSize + 'px')
+                .attr("font-size", fontSize + 'px')
                 .attr("font-family", fontFamily)
                 .attr("font-weight", fontWeight)
                 .text(verso1)
                 .call(wrap, 100-y)
 
         } else if(this.mode === con.CAOS) {
-
             let reflectPos = this.reflect(x, y, coin)
 
             this.canvasRef.append("text")
                 .attr("x", x)
                 .attr("y", y)
                 .attr("fill", color1)
-                .attr("font-size", fontSize + 'px')
+                .attr("font-size", fontSize + 'ch')
                 .attr("font-family", fontFamily)
                 .attr("font-weight", fontWeight)
                 .text(verso1)
@@ -147,7 +152,7 @@ class d3Builder {
                 .attr("x", reflectPos[0])
                 .attr("y", reflectPos[1])
                 .attr("fill", color2)
-                .attr("font-size", 5 + 'px')
+                .attr("font-size", fontSize / 2 + 'ch')
                 .attr("font-family", fontFamily)
                 .attr("font-weight", fontWeight)
                 .text(verso2)
@@ -185,32 +190,28 @@ class d3Builder {
     addFiguraMatematica = (args) => {
         let imgPath = args['img'];
         let img = require(`./../resources/fm/${imgPath}`)
-        let x = args["x"]
-        let y = args["y"]
         let width = args["width"]
         let rotationAngle = args['rotation']
 
         if(this.mode === con.POSTER) {
-            width = width / con.PosterPixelFactor;
 
             this.canvasRef.append("svg:image")
             .attr("xlink:href", img)
-            .attr("x", x)
-            .attr("y", y)
+            .attr("x", 0)
+            .attr("y", 0)
             .attr("width", width)
             .attr("height", con.POSTER_VIEWBOX_HEIGHT)
-            // .attr("transform", function(d) {
-            //     let center = this.getBBox();
-            //     return ("rotate(" + rotationAngle + ", " + 
-            //     (center.x + center.width / 2) + ", " + (center.y + center.height / 2) + ")")
-            // })            
+            .attr("transform", function(d) {
+                let center = this.getBBox();
+                return ("rotate(" + rotationAngle + ", " + 
+                (center.x + center.width / 2) + ", " + (center.y + center.height / 2) + ")")
+            })            
         } else if(this.mode === con.CAOS) {
-            width = width / con.CaosPixelFactor;
 
             this.canvasRef.append("svg:image")
             .attr("xlink:href", img)
-            .attr("x", x)
-            .attr("y", y)
+            .attr("x", 0)
+            .attr("y", 0)
             .attr("width", width)
             .attr("height", con.CAOS_VIEWBOX_HEIGHT)
             .attr("transform", function(d) {
