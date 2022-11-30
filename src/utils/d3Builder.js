@@ -158,10 +158,13 @@ class d3Builder {
 
     addFragmentoBotanico = (args) => {
         let imgPath = args['img'];
-        let img = require(`./../resources/fb/${imgPath}.jpg`)
+
+        let img = require(`./../resources/fb/${imgPath}`)
         let x = args["x"]
         let y = args["y"]
         let width = args["width"]
+
+
 
         if(this.mode === con.POSTER) {
             this.canvasRef.append("svg:image")
@@ -179,32 +182,36 @@ class d3Builder {
     }
 
 
-
     addFiguraMatematica = (args) => {
         let imgPath = args['img'];
-        let img = require(`./../resources/fm/${imgPath}.png`)
+        let img = require(`./../resources/fm/${imgPath}`)
         let x = args["x"]
         let y = args["y"]
+        let width = args["width"]
         let rotationAngle = args['rotation']
 
         if(this.mode === con.POSTER) {
+            width = width / con.PosterPixelFactor;
+
             this.canvasRef.append("svg:image")
             .attr("xlink:href", img)
             .attr("x", x)
             .attr("y", y)
-            .attr("width", con.POSTER_VIEWBOX_WIDTH)
+            .attr("width", width)
             .attr("height", con.POSTER_VIEWBOX_HEIGHT)
-            .attr("transform", function(d) {
-                let center = this.getBBox();
-                return ("rotate(" + rotationAngle + ", " + 
-                (center.x + center.width / 2) + ", " + (center.y + center.height / 2) + ")")
-            })            
+            // .attr("transform", function(d) {
+            //     let center = this.getBBox();
+            //     return ("rotate(" + rotationAngle + ", " + 
+            //     (center.x + center.width / 2) + ", " + (center.y + center.height / 2) + ")")
+            // })            
         } else if(this.mode === con.CAOS) {
+            width = width / con.CaosPixelFactor;
+
             this.canvasRef.append("svg:image")
             .attr("xlink:href", img)
             .attr("x", x)
             .attr("y", y)
-            .attr("width", con.CAOS_VIEWBOX_WIDTH)
+            .attr("width", width)
             .attr("height", con.CAOS_VIEWBOX_HEIGHT)
             .attr("transform", function(d) {
                 let center = this.getBBox();
@@ -250,17 +257,19 @@ class d3Builder {
 
     addFiguraBotanica = (args) => {
         let imgPath = args['img'];
-        let img = require(`./../resources/cb/${imgPath}.png`)
+        let img = require(`./../resources/cb/${imgPath}`)
         let x = args["x"]
         let y = args["y"]
         let width = args['width']
         if(this.mode === con.POSTER) {
+            width = width / con.PosterPixelFactor;
             this.canvasRef.append("svg:image")
             .attr("xlink:href", img)
             .attr("x", x)
             .attr("y", y)
             .attr("width", width) 
         } else if(this.mode === con.CAOS) {
+            width = width / con.CaosPixelFactor;
             this.canvasRef.append("svg:image")
             .attr("xlink:href", img)
             .attr("x", x)
@@ -272,7 +281,7 @@ class d3Builder {
 
     addFiguraCodigo = (args) => {
         let imgPath = args['img'];
-        let img = require(`./../resources/fc/${imgPath}.png`)
+        let img = require(`./../resources/fc/${imgPath}`)
         let x = args["x"]
         let y = args["y"]
         let width = args['width']
@@ -294,7 +303,7 @@ class d3Builder {
 
     addFiguraVerso = (args) => {
         let imgPath = args['img'];
-        let img = require(`./../resources/fv/${imgPath}.png`)
+        let img = require(`./../resources/fv/${imgPath}`)
         let x = args["x"]
         let y = args["y"]
         let width = args['width']
@@ -316,7 +325,7 @@ class d3Builder {
 
     addTextura = (args) => {
         let imgPath = args['img'];
-        let img = require(`./../resources/ft/${imgPath}.jpg`)
+        let img = require(`./../resources/ft/${imgPath}`)
         let coin = args['coin']
         if(coin) {
             if(this.mode === con.POSTER) {
@@ -341,7 +350,7 @@ class d3Builder {
 
     addFiguraMalu = (args) => {
         let imgPath = args['img'];
-        let img = require(`./../resources/fmalu/${imgPath}.jpg`)
+        let img = require(`./../resources/fmalu/${imgPath}`)
         let x = args["x"]
         let y = args["y"]
         let width = args['width']

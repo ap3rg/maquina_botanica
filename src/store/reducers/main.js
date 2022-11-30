@@ -43,6 +43,9 @@ const newLayer = (layers, state) => {
         let x;
         let y;
         let width;
+        let wh;
+        let maxWidth;
+
 
         switch(l) {
             case con.BACKGROUND_LAYER:
@@ -120,25 +123,30 @@ const newLayer = (layers, state) => {
                 figuras = con.FIGURES[con.FRAGMENTOS_BOTANICOS_LAYER][id]
                 figura = figuras[Math.floor(Math.random()*figuras.length)];
 
+                wh = utils.getImgSize(figura);
+                maxWidth = wh[0];
+
                 // Position
                 if(mode === con.POSTER){
+                    width = maxWidth < (3 * con.POSTER_VIEWBOX_WIDTH / 7) ? maxWidth : (3 * con.POSTER_VIEWBOX_WIDTH / 7)
                     x = utils.getXPosition(con.POSTER_VIEWBOX_WIDTH, 4);
                     y =  utils.getYPosition(con.POSTER_VIEWBOX_HEIGHT, 4);
                     layer[con.FRAGMENTOS_BOTANICOS_LAYER] = {
                         "img" : figura, 
                         "x": x, 
                         "y": y,
-                        "width": (3 * con.POSTER_VIEWBOX_WIDTH / 7),
+                        "width": width,
                         "coin": coin
                     }
                 } else if(mode === con.CAOS) {
+                    width = maxWidth < (5 * con.POSTER_VIEWBOX_WIDTH / 6) ? maxWidth : (5 * con.POSTER_VIEWBOX_WIDTH / 6)
                     x = utils.getXPosition(con.CAOS_VIEWBOX_WIDTH, 4);
                     y =  utils.getYPosition(con.CAOS_VIEWBOX_HEIGHT, 4);
                     layer[con.FRAGMENTOS_BOTANICOS_LAYER] = {
                         "img" : figura, 
                         "x": x, 
                         "y": y,
-                        "width": utils.randNumRange(con.POSTER_VIEWBOX_WIDTH / 6, (5 * con.POSTER_VIEWBOX_WIDTH / 6)),
+                        "width": utils.randNumRange(con.POSTER_VIEWBOX_WIDTH / 6, width),
                         "coin": coin
                     }
                 }
@@ -150,30 +158,37 @@ const newLayer = (layers, state) => {
                 } else if(state.mode === con.CAOS) {
                     rotationAngle = con.CAOS_ROTATION_ANGLES[Math.floor(Math.random()*con.CAOS_ROTATION_ANGLES.length)];
                 }
-
                 figuras = con.FIGURES[con.FIGURAS_MATEMATICAS_LAYER][id]
                 figura = figuras[Math.floor(Math.random()*figuras.length)];
+
+                wh = utils.getImgSize(figura);
+                maxWidth = wh[0];
                 // Position
                 if(mode === con.POSTER){
-                    x = utils.getXPosition(con.POSTER_VIEWBOX_WIDTH, 10);
-                    y =  utils.getYPosition(con.POSTER_VIEWBOX_HEIGHT, 10);
-                    layer[con.FIGURAS_MATEMATICAS_LAYER] = {
-                        "img" : figura, 
-                        "x": x, 
-                        "y": y,
-                        'rotation': rotationAngle,
-                        "coin": coin
-                    }
-                } else if(mode === con.CAOS) {
-                    
-                    x = utils.getXPosition(con.CAOS_VIEWBOX_WIDTH, 10);
-                    y =  utils.getYPosition(con.CAOS_VIEWBOX_HEIGHT, 10);
+
+                    width = maxWidth < con.POSTER_VIEWBOX_WIDTH ? maxWidth : con.POSTER_VIEWBOX_WIDTH
+
+                    x = utils.randNumRange(0, con.POSTER_VIEWBOX_WIDTH / 2);
+                    y = utils.randNumRange(0, con.POSTER_VIEWBOX_HEIGHT / 3);
                     layer[con.FIGURAS_MATEMATICAS_LAYER] = {
                         "img" : figura, 
                         "x": x, 
                         "y": y,
                         'rotation': rotationAngle,
                         "coin": coin,
+                        "width": width
+                    }
+                } else if(mode === con.CAOS) {
+                    width = maxWidth < con.CAOS_VIEWBOX_WIDTH ? maxWidth : con.CAOS_VIEWBOX_WIDTH
+                    x = utils.randNumRange(0, con.CAOS_VIEWBOX_WIDTH / 2);
+                    y = utils.randNumRange(0, con.CAOS_VIEWBOX_HEIGHT / 3);
+                    layer[con.FIGURAS_MATEMATICAS_LAYER] = {
+                        "img" : figura, 
+                        "x": x, 
+                        "y": y,
+                        'rotation': rotationAngle,
+                        "coin": coin,
+                        "width": width
                     }
                 }
                 break;
@@ -181,8 +196,14 @@ const newLayer = (layers, state) => {
                 // Position
                 figuras = con.FIGURES[con.FIGURAS_BOTANICAS_LAYER][id]
                 figura = figuras[Math.floor(Math.random()*figuras.length)];
+
+                wh = utils.getImgSize(figura);
+                maxWidth = wh[0];
                 if(mode === con.POSTER){
+
                     width = utils.randNumRange(con.POSTER_VIEWBOX_WIDTH / 10, (4 * con.POSTER_VIEWBOX_WIDTH / 10));
+                    width = maxWidth < width ? maxWidth : width;
+
                     x = utils.randNumRange(10, con.POSTER_VIEWBOX_WIDTH - width);
                     y =  utils.randNumRange(10, con.POSTER_VIEWBOX_HEIGHT - (2*width));
                     layer[con.FIGURAS_BOTANICAS_LAYER] = {
@@ -194,6 +215,8 @@ const newLayer = (layers, state) => {
                         }
                 } else if(mode === con.CAOS) {
                     width = utils.randNumRange(con.CAOS_VIEWBOX_WIDTH / 10, (4 * con.CAOS_VIEWBOX_WIDTH / 10));
+                    width = maxWidth < width ? maxWidth : width;
+
                     x = utils.randNumRange(10, con.CAOS_VIEWBOX_WIDTH - width);
                     y =  utils.randNumRange(10, con.CAOS_VIEWBOX_HEIGHT - (2*width));
                     layer[con.FIGURAS_BOTANICAS_LAYER] = {
@@ -208,8 +231,12 @@ const newLayer = (layers, state) => {
             case con.FIGURAS_CODIGOS_LAYER:
                 figuras = con.FIGURES[con.FIGURAS_CODIGOS_LAYER][id]
                 figura = figuras[Math.floor(Math.random()*figuras.length)];
+                wh = utils.getImgSize(figura);
+                maxWidth = wh[0];
 
                 width = utils.randNumRange(con.CAOS_VIEWBOX_WIDTH / 12, (4 * con.CAOS_VIEWBOX_WIDTH / 12));
+                width = maxWidth < width ? maxWidth : width
+
                 x = utils.randNumRange(10, con.CAOS_VIEWBOX_WIDTH - width);
                 y =  utils.randNumRange(10, con.CAOS_VIEWBOX_HEIGHT - (2*width));
                 layer[con.FIGURAS_CODIGOS_LAYER] = {
@@ -223,8 +250,12 @@ const newLayer = (layers, state) => {
             case con.FIGURAS_VERSOS_LAYER:
                 figuras = con.FIGURES[con.FIGURAS_VERSOS_LAYER][id]
                 figura = figuras[Math.floor(Math.random()*figuras.length)];
+                wh = utils.getImgSize(figura);
+                maxWidth = wh[0];
 
                 width = utils.randNumRange(con.CAOS_VIEWBOX_WIDTH / 12, (4 * con.CAOS_VIEWBOX_WIDTH / 12));
+                width = maxWidth < width ? maxWidth : width
+
                 x = utils.randNumRange(10, con.CAOS_VIEWBOX_WIDTH - width);
                 y =  utils.randNumRange(10, con.CAOS_VIEWBOX_HEIGHT - (2*width));
                 layer[con.FIGURAS_VERSOS_LAYER] = {
@@ -238,8 +269,12 @@ const newLayer = (layers, state) => {
             case con.FIGURAS_TEXTURAS_LAYER:
                     figuras = con.FIGURES[con.FIGURAS_TEXTURAS_LAYER][id]
                     figura = figuras[Math.floor(Math.random()*figuras.length)];
+                    wh = utils.getImgSize(figura);
+                    maxWidth = wh[0];
 
                     width = utils.randNumRange(con.CAOS_VIEWBOX_WIDTH / 12, (4 * con.CAOS_VIEWBOX_WIDTH / 12));
+                    width = maxWidth < width ? maxWidth : width
+
                     x = utils.randNumRange(10, con.CAOS_VIEWBOX_WIDTH - width);
                     y =  utils.randNumRange(10, con.CAOS_VIEWBOX_HEIGHT - (2*width));
                     layer[con.FIGURAS_TEXTURAS_LAYER] = {
@@ -252,10 +287,14 @@ const newLayer = (layers, state) => {
 
                 break;
             case con.FIGURAS_MALU_LAYER:
-                figuras = con.FIGURAS_MALU[id]
+                figuras = con.FIGURES[con.FIGURAS_MALU_LAYER][id]
                 figura = figuras[Math.floor(Math.random()*figuras.length)];
+                wh = utils.getImgSize(figura);
+                maxWidth = wh[0];
 
                 width = utils.randNumRange(con.CAOS_VIEWBOX_WIDTH / 12, (4 * con.CAOS_VIEWBOX_WIDTH / 12));
+                width = maxWidth < width ? maxWidth : width
+                
                 x = utils.randNumRange(10, con.CAOS_VIEWBOX_WIDTH - width);
                 y =  utils.randNumRange(10, con.CAOS_VIEWBOX_HEIGHT - (2*width));
                 layer[con.FIGURAS_MALU_LAYER] = {

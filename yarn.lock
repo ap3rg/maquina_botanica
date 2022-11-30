@@ -6529,6 +6529,11 @@
   "resolved" "https://registry.npmjs.org/lines-and-columns/-/lines-and-columns-1.2.4.tgz"
   "version" "1.2.4"
 
+"list-files@^1.1.4":
+  "integrity" "sha512-Io9moxNj7CxNPpiDj/uQJHtV3Azb3ftGytgxXc7NcLCB0IYwlY2TxowCUYx3CGc0WDvfnWlz5z+IdVnrmeVbog=="
+  "resolved" "https://registry.npmjs.org/list-files/-/list-files-1.1.4.tgz"
+  "version" "1.1.4"
+
 "loader-runner@^4.2.0":
   "integrity" "sha512-3R/1M+yS3j5ou80Me59j7F9IMs4PXs3VqRrm0TU3AbKPxlmpoY1TNscJV/oGJXo8qCatFGTfDbY6W6ipGOYXfg=="
   "resolved" "https://registry.npmjs.org/loader-runner/-/loader-runner-4.3.0.tgz"

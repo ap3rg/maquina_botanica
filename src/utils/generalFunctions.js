@@ -13,3 +13,11 @@ export const getYPosition = (height, divisor) => {
 
     return y
 }
+
+export function getImgSize(imgName) {
+    let parts = imgName.split('-');
+    let width = parseInt(parts[2])
+    let height = parseInt(parts[3])
+
+    return [width, height]
+}

@@ -1,4 +1,8 @@
- // All Constants
+import imagePaths from './resources/images.json'
+
+// All Constants
+ export const windowWidth = window.screen.width;
+ export const windowHeight = window.screen.height;
 
  // Reducers
  export const MODE = 'mode'
@@ -75,35 +79,19 @@ export const FONT_WEIGHTS = [
     "regular"
 ]
 
-// Fragmentos botanicos
-const numFragmentos = 42
-const fragmentos_botanicos = []
-for(let i = 1; i <= numFragmentos; i++) {
-    fragmentos_botanicos.push("fb-" + i)
-}
 
-// Figuras matematics
-const numFiguras = 74
-const figuras_matematicas = []
-for(let i = 1; i <= numFiguras; i++) {
-    figuras_matematicas.push("fm-" + i)
-}
+
 export const POSTER_ROTATION_ANGLES = [0, 90, 180, 360]
 export const CAOS_ROTATION_ANGLES = [0, 45, 90, 80, 180, 120, 265, 360]
 
-// Cartas botanicas
-const numCartas = 64
-const cartas_botanicas = []
-for(let i = 1; i <= numCartas; i++) {
-    cartas_botanicas.push("cb-" + i)
-}
-
-// Figuras codigos
-const numCodigos = 26
-const figuras_codigos = []
-for(let i = 1; i <= numCodigos; i++) {
-    figuras_codigos.push("fc-" + i)
-}
+// Fragmentos botanicos
+const fragmentos_botanicos = imagePaths['fb'];
+const figuras_matematicas = imagePaths['fm'];
+const cartas_botanicas = imagePaths['cb'];
+const figuras_codigos = imagePaths['fc'];
+const figuras_texturas = imagePaths['ft'];
+const figuras_versos = imagePaths['fv'];
+const figuras_malu = imagePaths['fmalu'];
 
 // Figuras texturas
 // [... start index of each book, finish index (non-inclusive)...]
@@ -113,8 +101,9 @@ for(let i=0; i < numTexturas.length; i++) {
     let array = []
     let start = numTexturas[i]
     let num = numTexturas[i + 1]
-    for(let i = start; i < num; i++) {
-        array.push("ft-" + i)
+    for(let j = start; j < num; j++) {
+        let img = figuras_texturas[j]
+        array.push(img)
     }
     textosTexturasIds.push(array)
 }
@@ -126,19 +115,12 @@ const textosVersosIds = []
         let array = []
         let start = numVersos[i]
         let num = numVersos[i + 1]
-        for(let i = start; i < num; i++) {
-            array.push("fv-" + i)
+        for(let j = start; j < num; j++) {
+            let img = figuras_versos[j]
+            array.push(img)
         }
         textosVersosIds.push(array)
     }
-
-// Figuras malu
-const numFigurasMalu = 2
-const figuras_malu = []
-for(let i = 1; i <= numFigurasMalu; i++) {
-    figuras_malu.push("fmalu-" + i)
-}
-export const FIGURAS_MALU = figuras_malu
 
 
 export const FIGURES = {
@@ -165,6 +147,9 @@ export const FIGURES = {
         2 : textosVersosIds[1],
         3 : textosVersosIds[2],
         5 : textosVersosIds[3],
+    },
+    [FIGURAS_MALU_LAYER] : {
+        1 : figuras_malu,
     }
 }
 
@@ -178,6 +163,10 @@ export const POSTER_TEXT_POSY = 20
 export const CAOS_VIEWBOX_WIDTH = 140
 export const CAOS_VIEWBOX_HEIGHT = 100
 export const CAOS_VIEWBOX = `0 0 ${CAOS_VIEWBOX_WIDTH} ${CAOS_VIEWBOX_HEIGHT}`
+
+export const SVGPixelWidth = windowHeight * 0.40
+export const PosterPixelFactor = SVGPixelWidth / POSTER_VIEWBOX_WIDTH;
+export const CaosPixelFactor = SVGPixelWidth / CAOS_VIEWBOX_WIDTH;
 
 // Biliografia
 export const BIBLIOGRAPHY_POSTER = 'Descripción lírica: La miscelanea de Mutis'
