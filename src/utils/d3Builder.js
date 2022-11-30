@@ -108,11 +108,11 @@ class d3Builder {
             } else if(numWords < 15) {
                 fontSize = 1.12
             } else if(numWords < 20) {
-                fontSize = 1.1
+                fontSize = 1.08
             } else if(numWords < 25) {
-                fontSize = 1.05
+                fontSize = .99
             } else if(numWords < 30) {
-                fontSize = 0.9
+                fontSize = 0.87
             } else if(numWords < 35) {
                 fontSize = 0.83
             } else if(numWords < 40) {
@@ -120,7 +120,7 @@ class d3Builder {
             } else if(numWords < 50) {
                 fontSize = 0.7
             } else {
-                fontSize = 0.55
+                fontSize = 0.52
             }
 
             fontSize = 10 * scaleFactor * fontSize
@@ -286,6 +286,10 @@ class d3Builder {
         let x = args["x"]
         let y = args["y"]
         let width = args['width']
+        let coin = args['coin']
+        if(!coin) {
+            return;
+        }
         if(this.mode === con.POSTER) {
             this.canvasRef.append("svg:image")
             .attr("xlink:href", img)
@@ -308,6 +312,11 @@ class d3Builder {
         let x = args["x"]
         let y = args["y"]
         let width = args['width']
+
+        let coin = args['coin']
+        if(!coin) {
+            return;
+        }
         if(this.mode === con.POSTER) {
             this.canvasRef.append("svg:image")
             .attr("xlink:href", img)
